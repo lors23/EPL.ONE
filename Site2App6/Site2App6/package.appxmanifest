@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
+  <Identity Name="EPL" Version="1.1.0.0" Publisher="CN=jeffburt" />
+  <Properties>
+    <DisplayName>EPL.ONE</DisplayName>
+    <PublisherDisplayName>publisher</PublisherDisplayName>
+    <Logo>images\storelogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.3.0</OSMinVersion>
+    <OSMaxVersionTested>6.3.0</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" StartPage="template/wat-wrapper.html">
+      <m2:VisualElements DisplayName="EPL" Description="English Premier League News (Rus. Lang.)" ForegroundText="light" BackgroundColor="#1a6fce" Square150x150Logo="images\Logo.png" Square30x30Logo="images\SmallLogo.png" ToastCapable="true">
+        <m2:LockScreen Notification="badge" BadgeLogo="images\BadgeLogo.png" />
+        <m2:DefaultTile Wide310x150Logo="images\widelogo.png" DefaultSize="wide310x150Logo" Square70x70Logo="images\Square70x70Logo.png" Square310x310Logo="images\Square310x310Logo.png">
+          <m2:TileUpdate Recurrence="halfHour" UriTemplate="http://epl.one/rss.xml" />
+        </m2:DefaultTile>
+        <m2:SplashScreen Image="images\splashscreen.png" />
+        <m2:ApplicationView MinWidth="width500" />
+      </m2:VisualElements>
+      <Extensions>
+        <Extension Category="windows.search" />
+        <Extension Category="windows.backgroundTasks" StartPage="epl.one">
+          <BackgroundTasks>
+            <Task Type="pushNotification" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
+      <ApplicationContentUriRules>
+        <Rule Match="https://www.microsoft.com" Type="include" />
+        <Rule Match="https://wat-docs.azurewebsites.net" Type="include" />
+      </ApplicationContentUriRules>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <Capability Name="privateNetworkClientServer" />
+    <DeviceCapability Name="location" />
+  </Capabilities>
+  <Extensions>
+    <Extension Category="windows.activatableClass.inProcessServer">
+      <InProcessServer>
+        <Path>CLRHost.dll</Path>
+        <ActivatableClass ActivatableClassId="AppPromo.RateReminder" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="AppPromo.RateReminderResult" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="AppPromo.RateHelper" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="WatExtensions.SuperCache.PreloadScript" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="WatExtensions.SuperCache.NavigatingEventArgs" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="WatExtensions.SuperCache.Config.SuperCacheConfig" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="WatExtensions.SuperCache.UriExtensions" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="WatExtensions.SuperCacheManager" ThreadingModel="both" />
+      </InProcessServer>
+    </Extension>
+  </Extensions>
+</Package>
